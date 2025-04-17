@@ -2,6 +2,6 @@
 
 public class GeolocationDto
 {
-    public string Type { get; set; }
-    public List<double> Coordinates { get; set; }
+    public string? Type { get; set; }
+    public double[]? Coordinates { get; set; }
 }

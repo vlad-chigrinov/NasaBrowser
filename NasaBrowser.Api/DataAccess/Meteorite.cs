@@ -1,7 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
-using NasaBrowser.Api.Converters;
 
 namespace NasaBrowser.Api.DataAccess;
 
@@ -18,5 +16,5 @@ public class Meteorite
     public DateTime? Year { get; set; }
     public double? Reclat { get; set; }
     public double? Reclong { get; set; }
-    public Geolocation? Geolocation { get; set; }
+    public Geolocation Geolocation { get; set; }
 }

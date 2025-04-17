@@ -10,7 +10,7 @@ public sealed class NasaDataSyncService : BackgroundService
     private readonly HttpClient _httpClient;
     private readonly IServiceProvider _serviceProvider;
     private readonly ILogger<NasaDataSyncService> _logger;
-    private readonly TimeSpan _interval = TimeSpan.FromMinutes(5);
+    private readonly TimeSpan _interval = TimeSpan.FromSeconds(10);
     private readonly PeriodicTimer _timer;
 
     public NasaDataSyncService(
@@ -68,12 +68,8 @@ public sealed class NasaDataSyncService : BackgroundService
         var response = await _httpClient.GetAsync("https://raw.githubusercontent.com/biggiko/nasa-dataset/refs/heads/main/y77d-th95.json", ct);
         response.EnsureSuccessStatusCode();
         var json = await response.Content.ReadAsStringAsync(ct);
-        var meteorites = JsonSerializer.Deserialize<List<MeteoriteDto>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true})!;
-        return meteorites.Select(meteorite =>
-        {
-            _logger.LogInformation(meteorite.ToString());
-            return meteorite.ToEntity();
-        });
+        var meteorites = JsonSerializer.Deserialize<List<MeteoriteDto>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
+        return meteorites.Select(meteorite => meteorite.ToEntity());
     }
 
     private async Task SyncDataAsync(ApplicationDbContext dbDbContext, IEnumerable<Meteorite> jsonItems)

@@ -9,7 +9,7 @@ public sealed class ApplicationDbContext : DbContext
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-        Database.EnsureDeleted();
+        //Database.EnsureDeleted();
         Database.EnsureCreated();
     }
     
@@ -20,8 +20,7 @@ public sealed class ApplicationDbContext : DbContext
             entity.OwnsOne(m => m.Geolocation, g =>
             {
                 g.Property(geo => geo.Type).HasColumnName("GeolocationType");
-                g.Property(geo => geo.Latitude).HasColumnName("Latitude");
-                g.Property(geo => geo.Longitude).HasColumnName("Longitude");
+                g.Property(geo => geo.Coordinates).HasColumnName("Coordinates");
             });
         });
     }

@@ -26,16 +26,14 @@ public class MeteoriteDto
             Recclass = Recclass,
             Mass = string.IsNullOrEmpty(Mass) ? null : double.Parse(Mass, CultureInfo.InvariantCulture),
             Fall = Fall,
-            Year = Year == null ? null : DateTime.Parse(Year, CultureInfo.InvariantCulture),
-            Reclat = string.IsNullOrEmpty(Mass) ? null : double.Parse(Reclat, CultureInfo.InvariantCulture),
-            Reclong = string.IsNullOrEmpty(Mass) ? null : double.Parse(Reclong, CultureInfo.InvariantCulture),
-            Geolocation = null
+            Year = string.IsNullOrEmpty(Year) ? null : DateTime.Parse(Year, CultureInfo.InvariantCulture),
+            Reclat = string.IsNullOrEmpty(Reclat) ? null : double.Parse(Reclat, CultureInfo.InvariantCulture),
+            Reclong = string.IsNullOrEmpty(Reclong) ? null : double.Parse(Reclong, CultureInfo.InvariantCulture),
+            Geolocation = new Geolocation
+            {
+                Type = Geolocation?.Type ?? null,
+                Coordinates = Geolocation?.Coordinates ?? null
+            }
         };
-    }
-
-    public override string ToString()
-    {
-        return $"{Id} : {Name} : {Nametype} : {Recclass} : {Mass} : {Fall} : {Year} : {Reclat} : {Reclong}\n" +
-               $"{Geolocation?.Type}";
     }
 }
