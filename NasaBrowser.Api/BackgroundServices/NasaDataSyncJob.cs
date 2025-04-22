@@ -2,65 +2,27 @@
 using Microsoft.EntityFrameworkCore;
 using NasaBrowser.Api.DataAccess;
 using NasaBrowser.Api.DBOs;
+using Quartz;
 
 namespace NasaBrowser.Api.BackgroundServices;
 
-public sealed class NasaDataSyncService : BackgroundService
+[DisallowConcurrentExecution]
+public sealed class NasaDataSyncJob : IJob
 {
     private readonly HttpClient _httpClient;
-    private readonly IServiceProvider _serviceProvider;
-    private readonly ILogger<NasaDataSyncService> _logger;
+    private readonly ILogger<NasaDataSyncJob> _logger;
     private readonly TimeSpan _interval = TimeSpan.FromSeconds(10);
-    private readonly PeriodicTimer _timer;
+    private readonly ApplicationDbContext _dbContext;
 
-    public NasaDataSyncService(
+    public NasaDataSyncJob(
         HttpClient httpClient,
         IServiceProvider serviceProvider,
-        ILogger<NasaDataSyncService> logger)
+        ApplicationDbContext dbContext,
+        ILogger<NasaDataSyncJob> logger)
     {
         _httpClient = httpClient;
-        _serviceProvider = serviceProvider;
+        _dbContext = dbContext;
         _logger = logger;
-        _timer = new PeriodicTimer(_interval);
-    }
-
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-    {
-        try
-        {
-            // Первый запуск сразу
-            await DoWorkAsync(stoppingToken);
-
-            using var timer = new PeriodicTimer(_interval);
-            while (await timer.WaitForNextTickAsync(stoppingToken))
-            {
-                await DoWorkAsync(stoppingToken);
-            }
-        }
-        catch (OperationCanceledException)
-        {
-            // Игнорируем, если задача отменена
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Ошибка в фоновой задаче");
-        }
-    }
-
-    private async Task DoWorkAsync(CancellationToken stoppingToken)
-    {
-        using var scope = _serviceProvider.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-
-        try
-        {
-            var jsonData = await FetchDataAsync(stoppingToken);
-            await SyncDataAsync(dbContext, jsonData);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Ошибка синхронизации данных");
-        }
     }
 
     private async Task<IEnumerable<Meteorite>> FetchDataAsync(CancellationToken ct)
@@ -88,5 +50,18 @@ public sealed class NasaDataSyncService : BackgroundService
         var toDelete = dbItems.Values.Where(x => !jsonIds.Contains(x.Id));
         dbDbContext.Meteorites.RemoveRange(toDelete);
         await dbDbContext.SaveChangesAsync();
+    }
+
+    public async Task Execute(IJobExecutionContext context)
+    {
+        try
+        {
+            var jsonData = await FetchDataAsync(context.CancellationToken);
+            await SyncDataAsync(_dbContext, jsonData);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Ошибка синхронизации данных");
+        }
     }
 }

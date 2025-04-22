@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using NasaBrowser.Api.BackgroundServices;
 using NasaBrowser.Api.DataAccess;
+using Quartz;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +11,11 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-builder.Services.AddHostedService<NasaDataSyncService>();
+builder.Services.AddQuartz();
+
+builder.Services.ConfigureOptions<NasaDataSyncJobSetup>();
+
+builder.Services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
 
 builder.Services.AddDbContext<ApplicationDbContext>(optionsBuilder =>
     optionsBuilder.UseNpgsql("Host=127.0.0.1;Port=5432;Database=nasa_db;User ID=SA;Password=Qwerty12;"));
