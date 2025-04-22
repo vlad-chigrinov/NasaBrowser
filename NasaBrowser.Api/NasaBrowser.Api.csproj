@@ -13,4 +13,9 @@
         <PackageReference Include="Quartz.Extensions.Hosting" Version="3.14.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\NasaBrowser.Application\NasaBrowser.Application.csproj" />
+      <ProjectReference Include="..\NasaBrowser.Infrastructure\NasaBrowser.Infrastructure.csproj" />
+    </ItemGroup>
+
 </Project>
