@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace NasaBrowser.Domain.Exceptions;
+namespace NasaBrowser.Domain.Common;
 
 public abstract class ExceptionBase : Exception
 {

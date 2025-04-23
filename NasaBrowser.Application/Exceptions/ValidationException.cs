@@ -1,6 +1,7 @@
 ﻿using System.Net;
+using NasaBrowser.Domain.Common;
 
-namespace NasaBrowser.Domain.Exceptions;
+namespace NasaBrowser.Application.Exceptions;
 
 public class ValidationException : ExceptionBase
 {

@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
-using ValidationException = NasaBrowser.Domain.Exceptions.ValidationException;
+using ValidationException = NasaBrowser.Application.Exceptions.ValidationException;
 
 namespace NasaBrowser.Application.MediatR
 {

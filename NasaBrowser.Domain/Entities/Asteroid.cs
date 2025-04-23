@@ -2,12 +2,13 @@
 
 public class Asteroid
 {
-    public int Id { get; private set; }
-    public string Name { get; private set; }
-    public NameType NameType { get; private set; }
-    public string RecClass { get; private set; }
-    public int Mass { get; private set; }
-    public FallType Fall { get; private set; }
-    public int Year { get; private set; }
-    public Point Coordinates { get; private set; }
+    public required int Id { get; init; }
+    public required string Name { get; init; }
+    public required NameType NameType { get; init; }
+    public required string RecClass { get; init; }
+    public int? Mass { get; init; }
+    public required FallType Fall { get; init; }
+    public int? Year { get; init; }
+    public decimal? RecLat { get; set; }
+    public decimal? RecLong { get; set; }
 }

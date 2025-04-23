@@ -19,6 +19,6 @@ public class GroupAsteroidsQueryValidator : AbstractValidator<GroupAsteroidsQuer
             {
                 return (s.StartYear is null || s.EndYear is null) || (s.StartYear <= s.EndYear);
             })
-            .WithMessage("The start year must be less than and equal to the end year.");
+            .WithMessage("The start year must be less than or equal to the end year.");
     }
 }
