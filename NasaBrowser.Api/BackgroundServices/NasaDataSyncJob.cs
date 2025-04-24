@@ -1,7 +1,4 @@
-﻿using System.Text.Json;
-using Microsoft.EntityFrameworkCore;
-using NasaBrowser.Api.DBOs;
-using NasaBrowser.Infrastructure.Database;
+﻿using NasaBrowser.Infrastructure.Database;
 using Quartz;
 
 namespace NasaBrowser.Api.BackgroundServices;

@@ -5,12 +5,11 @@ using NasaBrowser.Domain.QueryableTransformations;
 
 namespace NasaBrowser.Infrastructure.Database.Queryable.Transformers;
 
-public class AsteroidAggregateTransformer : IQueryTransformer<AsteroidGroupResponse, IGrouping<int, Asteroid>, AsteroidAggregateTransformation>
+public class AsteroidAggregateTransformer : IQueryTransformer<AsteroidAggregateTransformation, IGrouping<int, Asteroid>, AsteroidGroupResponse>
 {
-    public IQueryable<AsteroidGroupResponse> Transform(IQueryable<IGrouping<int, Asteroid>> queryable,
-        AsteroidAggregateTransformation options)
+    public IQueryable<AsteroidGroupResponse> Transform(AsteroidAggregateTransformation options)
     {
-        return queryable.Select(group => new AsteroidGroupResponse
+        return options.Queryable.Select(group => new AsteroidGroupResponse
         {
             Year = group.Key,
             Quantity = group.Count(),

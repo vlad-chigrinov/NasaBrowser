@@ -1,6 +1,8 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using NasaBrowser.Infrastructure.Database;
+using NasaBrowser.Application.Queries.GroupAsteroids;
+using NasaBrowser.Domain.Contracts.Requests;
+using NasaBrowser.Domain.Contracts.Responses;
 
 namespace NasaBrowser.Api.Controllers;
 
@@ -8,16 +10,18 @@ namespace NasaBrowser.Api.Controllers;
 [Route("[controller]")]
 public class NasaDataController : ControllerBase
 {
-    private readonly AsteroidsDbContext _dbContext;
+    private readonly ISender _sender;
 
-    public NasaDataController(AsteroidsDbContext dbContext)
+    public NasaDataController(ISender sender)
     {
-        _dbContext = dbContext;
+        _sender = sender;
     }
 
     [HttpGet]
-    public async Task<List<Meteorite>> Get(CancellationToken ct)
+    public async Task<IEnumerable<AsteroidGroupResponse>> Get(
+        [FromQuery] AsteroidsGroupRequest request,
+        CancellationToken ct)
     {
-        return await _dbContext.Meteorites.ToListAsync(ct);
+        return await _sender.Send(new GroupAsteroidsQuery { GroupRequest = request }, ct);
     }
 }

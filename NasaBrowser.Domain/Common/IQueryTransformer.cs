@@ -1,6 +1,9 @@
-﻿namespace NasaBrowser.Domain.Common;
+﻿using NasaBrowser.Domain.QueryableTransformations;
 
-public interface IQueryTransformer<out TOutput, in TInput, in TOptions>
+namespace NasaBrowser.Domain.Common;
+
+public interface IQueryTransformer<TTransformation, TQuery, TQueryResult>
+    where TTransformation : TransformationBase<TQuery, TQueryResult>
 {
-    public IQueryable<TOutput> Transform(IQueryable<TInput> queryable, TOptions options);
+    IQueryable<TQueryResult> Transform(TTransformation transformation);
 }

@@ -1,7 +1,13 @@
+using NasaBrowser.Domain.Entities;
+
 namespace NasaBrowser.Domain.QueryableTransformations;
 
-public class AsteroidFilterTransformation
+public class AsteroidFilterTransformation : TransformationBase<Asteroid, Asteroid>
 {
+    public AsteroidFilterTransformation(IQueryable<Asteroid> queryable) : base(queryable)
+    {
+    }
+
     public int? StartYear { get; set; }
     public int? EndYear { get; set; }
     public string? RecClass { get; set; }

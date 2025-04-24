@@ -2,22 +2,21 @@
 using NasaBrowser.Domain.Common;
 using NasaBrowser.Domain.Contracts.Requests;
 using NasaBrowser.Domain.Contracts.Responses;
-using NasaBrowser.Domain.Entities;
 using NasaBrowser.Domain.QueryableTransformations;
 
 namespace NasaBrowser.Infrastructure.Database.Queryable.Transformers;
 
-public class AsteroidSortTransformer : IQueryTransformer<AsteroidGroupResponse, AsteroidGroupResponse, AsteroidSortTransformation>
+public class AsteroidSortTransformer : IQueryTransformer<AsteroidSortTransformation, AsteroidGroupResponse, AsteroidGroupResponse>
 {
-    public IQueryable<AsteroidGroupResponse> Transform(IQueryable<AsteroidGroupResponse> queryable, AsteroidSortTransformation options)
+    public IQueryable<AsteroidGroupResponse> Transform(AsteroidSortTransformation options)
     {
         if (options.Desc)
         {
-            return queryable.OrderByDescending(KeySelector(options.SortBy));
+            return options.Queryable.OrderByDescending(KeySelector(options.SortBy));
         }
         else
         {
-            return queryable.OrderBy(KeySelector(options.SortBy));
+            return options.Queryable.OrderBy(KeySelector(options.SortBy));
         }
     }
     

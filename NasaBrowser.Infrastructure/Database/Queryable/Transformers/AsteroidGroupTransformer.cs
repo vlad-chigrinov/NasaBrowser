@@ -1,14 +1,13 @@
 ﻿using NasaBrowser.Domain.Common;
-using NasaBrowser.Domain.Contracts.Responses;
 using NasaBrowser.Domain.Entities;
 using NasaBrowser.Domain.QueryableTransformations;
 
 namespace NasaBrowser.Infrastructure.Database.Queryable.Transformers;
 
-public class AsteroidGroupTransformer : IQueryTransformer<IGrouping<int, Asteroid>, Asteroid, AsteroidGroupTransformation>
+public class AsteroidGroupTransformer : IQueryTransformer<AsteroidGroupTransformation, Asteroid, IGrouping<int, Asteroid>>
 {
-    public IQueryable<IGrouping<int, Asteroid>> Transform(IQueryable<Asteroid> queryable, AsteroidGroupTransformation options)
+    public IQueryable<IGrouping<int, Asteroid>> Transform(AsteroidGroupTransformation options)
     {
-        return queryable.GroupBy(asteroid => asteroid.Year);
+        return options.Queryable.GroupBy(asteroid => asteroid.Year);
     }
 }
