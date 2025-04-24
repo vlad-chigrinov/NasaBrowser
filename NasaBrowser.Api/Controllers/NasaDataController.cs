@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NasaBrowser.Api.DataAccess;
+using NasaBrowser.Infrastructure.Database;
 
 namespace NasaBrowser.Api.Controllers;
 
@@ -8,9 +8,9 @@ namespace NasaBrowser.Api.Controllers;
 [Route("[controller]")]
 public class NasaDataController : ControllerBase
 {
-    private readonly ApplicationDbContext _dbContext;
+    private readonly AsteroidsDbContext _dbContext;
 
-    public NasaDataController(ApplicationDbContext dbContext)
+    public NasaDataController(AsteroidsDbContext dbContext)
     {
         _dbContext = dbContext;
     }

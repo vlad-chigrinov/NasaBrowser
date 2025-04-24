@@ -1,6 +1,9 @@
-﻿namespace NasaBrowser.Application.Queries.FetchAsteroids;
+﻿using MediatR;
+using NasaBrowser.Application.Models.AsteroidJsonModel;
 
-public class FetchAsteroidsQuery
+namespace NasaBrowser.Application.Queries.FetchAsteroids;
+
+public class FetchAsteroidsQuery : IRequest<IEnumerable<AsteroidJsonDTO>>
 {
     
 }

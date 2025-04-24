@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using NasaBrowser.Api.BackgroundServices;
-using NasaBrowser.Api.DataAccess;
+using NasaBrowser.Infrastructure.Database;
 using Quartz;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,7 +17,7 @@ builder.Services.ConfigureOptions<NasaDataSyncJobSetup>();
 
 builder.Services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
 
-builder.Services.AddDbContext<ApplicationDbContext>(optionsBuilder =>
+builder.Services.AddDbContext<AsteroidsDbContext>(optionsBuilder =>
     optionsBuilder.UseNpgsql("Host=127.0.0.1;Port=5432;Database=nasa_db;User ID=SA;Password=Qwerty12;"));
 
 builder.Services.AddHttpClient();

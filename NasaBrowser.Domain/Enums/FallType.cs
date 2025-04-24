@@ -1,4 +1,4 @@
-namespace NasaBrowser.Domain.Entities;
+namespace NasaBrowser.Domain.Enums;
 
 public enum FallType
 {

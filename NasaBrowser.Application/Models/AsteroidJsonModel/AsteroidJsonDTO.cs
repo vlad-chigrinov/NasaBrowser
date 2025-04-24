@@ -1,4 +1,4 @@
-namespace NasaBrowser.Infrastructure.InnerModels.AsteroidJsonModel;
+namespace NasaBrowser.Application.Models.AsteroidJsonModel;
 
 public class AsteroidJsonDTO
 {

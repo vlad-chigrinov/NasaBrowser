@@ -1,4 +1,4 @@
-﻿namespace NasaBrowser.Application.Queries.GetAvailableYears;
+﻿namespace NasaBrowser.Application.Queries.AvailableYears;
 
 public class AvailableYearsQuery
 {

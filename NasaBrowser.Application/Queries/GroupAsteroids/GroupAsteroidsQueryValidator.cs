@@ -6,7 +6,7 @@ public class GroupAsteroidsQueryValidator : AbstractValidator<GroupAsteroidsQuer
 {
     public GroupAsteroidsQueryValidator()
     {
-        RuleFor(v => v.Request)
+        RuleFor(v => v.GroupRequest)
             .Must(s =>
             {
                 int currentYear = DateTime.UtcNow.Year;
