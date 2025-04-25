@@ -9,7 +9,10 @@ public static class DependencyInjection
     public static IServiceCollection AddCaching(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddHybridCache();
-        services.AddStackExchangeRedisCache(options => options.Configuration = configuration["Redis:ConnectionString"]);
+        
+        var connectionString = configuration.GetConnectionString("Redis")
+            ?? throw new ArgumentException("Redis connection string not found. Please check your configuration.");;
+        services.AddStackExchangeRedisCache(options => options.Configuration = connectionString);
 
         services.AddScoped<IAsteroidsGroupCacheRepository, AsteroidsGroupCacheRepository>();
         
