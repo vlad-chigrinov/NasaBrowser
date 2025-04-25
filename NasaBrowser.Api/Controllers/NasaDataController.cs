@@ -18,7 +18,7 @@ public class NasaDataController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IEnumerable<AsteroidGroupResponse>> Get(
+    public async Task<IEnumerable<AsteroidsGroupResponse>> Get(
         [FromQuery] AsteroidsGroupRequest request,
         CancellationToken ct)
     {

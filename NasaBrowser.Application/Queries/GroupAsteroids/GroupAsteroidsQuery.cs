@@ -4,7 +4,7 @@ using NasaBrowser.Domain.Contracts.Responses;
 
 namespace NasaBrowser.Application.Queries.GroupAsteroids;
 
-public class GroupAsteroidsQuery : IRequest<IEnumerable<AsteroidGroupResponse>>
+public class GroupAsteroidsQuery : IRequest<IEnumerable<AsteroidsGroupResponse>>
 {
     public required AsteroidsGroupRequest GroupRequest { get; set; }
 }

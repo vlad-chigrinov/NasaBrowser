@@ -13,15 +13,15 @@ public static class DependencyInjection
     public static IServiceCollection AddQueryables(this IServiceCollection services)
     {
         services.AddTransient<IQueryProducer<Asteroid>, AsteroidQueryableProducer>();
-        services.AddTransient<IQueryExecutor<AsteroidGroupResponse>, AsteroidQueryableExecutor>();
+        services.AddTransient<IQueryExecutor<AsteroidsGroupResponse>, AsteroidQueryableExecutor>();
         
         services.AddTransient<IQueryTransformer<AsteroidFilterTransformation, Asteroid, Asteroid>,
                 AsteroidFilterTransformer>();
         services.AddTransient<IQueryTransformer<AsteroidGroupTransformation, Asteroid, IGrouping<int?, Asteroid>>,
             AsteroidGroupTransformer>();
-        services.AddTransient<IQueryTransformer<AsteroidAggregateTransformation, IGrouping<int?, Asteroid>, AsteroidGroupResponse>,
+        services.AddTransient<IQueryTransformer<AsteroidAggregateTransformation, IGrouping<int?, Asteroid>, AsteroidsGroupResponse>,
             AsteroidAggregateTransformer>();
-        services.AddTransient<IQueryTransformer<AsteroidSortTransformation, AsteroidGroupResponse, AsteroidGroupResponse>,
+        services.AddTransient<IQueryTransformer<AsteroidSortTransformation, AsteroidsGroupResponse, AsteroidsGroupResponse>,
             AsteroidSortTransformer>();
 
         return services;

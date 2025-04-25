@@ -5,9 +5,9 @@ using NasaBrowser.Domain.QueryableWorkflow;
 
 namespace NasaBrowser.Infrastructure.Database.Queryable;
 
-public class AsteroidQueryableExecutor: IQueryExecutor<AsteroidGroupResponse>
+public class AsteroidQueryableExecutor: IQueryExecutor<AsteroidsGroupResponse>
 {
-    public async Task<IEnumerable<AsteroidGroupResponse>> ExecuteAsync(IQueryable<AsteroidGroupResponse> queryable, CancellationToken ct = default)
+    public async Task<IEnumerable<AsteroidsGroupResponse>> ExecuteAsync(IQueryable<AsteroidsGroupResponse> queryable, CancellationToken ct = default)
     {
         return await queryable.ToListAsync(ct);
     }

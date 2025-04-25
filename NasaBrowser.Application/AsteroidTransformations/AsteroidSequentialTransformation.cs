@@ -5,7 +5,7 @@ using NasaBrowser.Domain.QueryableWorkflow.QueryableTransformations;
 
 namespace NasaBrowser.Application.AsteroidTransformations;
 
-public class AsteroidSequentialTransformation : TransformationBase<Asteroid, AsteroidGroupResponse>
+public class AsteroidSequentialTransformation : TransformationBase<Asteroid, AsteroidsGroupResponse>
 {
     public AsteroidSequentialTransformation(IQueryable<Asteroid> queryable) : base(queryable)
     {

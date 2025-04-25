@@ -3,9 +3,9 @@ using NasaBrowser.Domain.Contracts.Responses;
 
 namespace NasaBrowser.Domain.QueryableWorkflow.QueryableTransformations;
 
-public class AsteroidSortTransformation : TransformationBase<AsteroidGroupResponse, AsteroidGroupResponse>
+public class AsteroidSortTransformation : TransformationBase<AsteroidsGroupResponse, AsteroidsGroupResponse>
 {
-    public AsteroidSortTransformation(IQueryable<AsteroidGroupResponse> queryable) : base(queryable)
+    public AsteroidSortTransformation(IQueryable<AsteroidsGroupResponse> queryable) : base(queryable)
     {
     }
 

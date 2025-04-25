@@ -9,11 +9,11 @@ namespace NasaBrowser.Application.AsteroidTransformations;
 public class AsteroidSequentialTransformer(
     IQueryTransformer<AsteroidFilterTransformation, Asteroid, Asteroid> filterTransformer,
     IQueryTransformer<AsteroidGroupTransformation, Asteroid, IGrouping<int?, Asteroid>> groupTransformer,
-    IQueryTransformer<AsteroidAggregateTransformation, IGrouping<int?, Asteroid>, AsteroidGroupResponse> aggregateTransformer,
-    IQueryTransformer<AsteroidSortTransformation, AsteroidGroupResponse, AsteroidGroupResponse> sortTransformer)
-    : IQueryTransformer<AsteroidSequentialTransformation, Asteroid, AsteroidGroupResponse>
+    IQueryTransformer<AsteroidAggregateTransformation, IGrouping<int?, Asteroid>, AsteroidsGroupResponse> aggregateTransformer,
+    IQueryTransformer<AsteroidSortTransformation, AsteroidsGroupResponse, AsteroidsGroupResponse> sortTransformer)
+    : IQueryTransformer<AsteroidSequentialTransformation, Asteroid, AsteroidsGroupResponse>
 {
-    public IQueryable<AsteroidGroupResponse> Transform(AsteroidSequentialTransformation transformation)
+    public IQueryable<AsteroidsGroupResponse> Transform(AsteroidSequentialTransformation transformation)
     {
         var filtered = filterTransformer.Transform(new(transformation.Queryable)
         {

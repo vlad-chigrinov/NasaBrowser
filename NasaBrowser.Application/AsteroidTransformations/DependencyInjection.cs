@@ -10,7 +10,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddQueryableTransformer(this IServiceCollection services)
     {
-        services.AddTransient<IQueryTransformer<AsteroidSequentialTransformation, Asteroid, AsteroidGroupResponse>, AsteroidSequentialTransformer>();
+        services.AddTransient<IQueryTransformer<AsteroidSequentialTransformation, Asteroid, AsteroidsGroupResponse>, AsteroidSequentialTransformer>();
         return services;
     }
 }

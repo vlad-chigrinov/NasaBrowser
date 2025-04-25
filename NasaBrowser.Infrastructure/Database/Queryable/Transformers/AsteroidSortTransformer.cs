@@ -7,9 +7,9 @@ using NasaBrowser.Domain.QueryableWorkflow.QueryableTransformations;
 
 namespace NasaBrowser.Infrastructure.Database.Queryable.Transformers;
 
-public class AsteroidSortTransformer : IQueryTransformer<AsteroidSortTransformation, AsteroidGroupResponse, AsteroidGroupResponse>
+public class AsteroidSortTransformer : IQueryTransformer<AsteroidSortTransformation, AsteroidsGroupResponse, AsteroidsGroupResponse>
 {
-    public IQueryable<AsteroidGroupResponse> Transform(AsteroidSortTransformation options)
+    public IQueryable<AsteroidsGroupResponse> Transform(AsteroidSortTransformation options)
     {
         if (options.Desc)
         {
@@ -21,7 +21,7 @@ public class AsteroidSortTransformer : IQueryTransformer<AsteroidSortTransformat
         }
     }
     
-    private Expression<Func<AsteroidGroupResponse, object>> KeySelector(AsteroidSortType sortType)
+    private Expression<Func<AsteroidsGroupResponse, object>> KeySelector(AsteroidSortType sortType)
     {
         return sortType switch
         {
