@@ -1,6 +1,9 @@
-﻿namespace NasaBrowser.Application.Queries.AvailableYears;
+﻿using MediatR;
+using NasaBrowser.Domain.Contracts.Responses;
 
-public class AvailableYearsQuery
+namespace NasaBrowser.Application.Queries.AvailableYears;
+
+public class AvailableYearsQuery : IRequest<AvailableYearsResponse>
 {
     
 }

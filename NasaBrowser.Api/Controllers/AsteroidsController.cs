@@ -1,5 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using NasaBrowser.Application.Queries.AvailableRecClasses;
+using NasaBrowser.Application.Queries.AvailableYears;
 using NasaBrowser.Application.Queries.GroupAsteroids;
 using NasaBrowser.Domain.Contracts.Requests;
 using NasaBrowser.Domain.Contracts.Responses;
@@ -23,5 +25,17 @@ public class AsteroidsController : ControllerBase
         CancellationToken ct)
     {
         return await _sender.Send(new GroupAsteroidsQuery { GroupRequest = request }, ct);
+    }
+
+    [HttpGet("years")]
+    public async Task<AvailableYearsResponse> GetAvailableYears(CancellationToken ct)
+    {
+        return await _sender.Send(new AvailableYearsQuery(), ct);
+    }
+    
+    [HttpGet("recclasses")]
+    public async Task<AvailableRecClassesResponse> GetAvailableRecClasses(CancellationToken ct)
+    {
+        return await _sender.Send(new AvailableRecClassesQuery(), ct);
     }
 }

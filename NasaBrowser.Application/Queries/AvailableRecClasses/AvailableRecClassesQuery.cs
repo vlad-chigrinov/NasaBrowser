@@ -1,6 +1,9 @@
-﻿namespace NasaBrowser.Application.Queries.AvailableRecClasses;
+﻿using MediatR;
+using NasaBrowser.Domain.Contracts.Responses;
 
-public class AvailableRecClassesQuery
+namespace NasaBrowser.Application.Queries.AvailableRecClasses;
+
+public class AvailableRecClassesQuery : IRequest<AvailableRecClassesResponse>
 {
     
 }

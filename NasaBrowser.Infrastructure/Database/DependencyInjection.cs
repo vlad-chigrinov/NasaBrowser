@@ -17,6 +17,9 @@ public static class DependencyInjection
 
         services.AddScoped<IAsteroidsRepository, AsteroidsRepository>();
 
+        services.AddTransient<IRecClassecDataSource, RecClassesDataSource>();
+        services.AddTransient<IYearsDataSource, YearsDataSource>();
+
         services.AddQueryables();
         
         return services;

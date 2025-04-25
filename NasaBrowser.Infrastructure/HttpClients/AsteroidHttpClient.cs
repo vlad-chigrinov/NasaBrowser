@@ -18,7 +18,7 @@ public class AsteroidHttpClient : IDataSource<IEnumerable<AsteroidJsonDTO>>
         _httpClient.BaseAddress = new Uri(_options.BaseAddress);
     }
 
-    public async Task<IEnumerable<AsteroidJsonDTO>> GetAsync()
+    public async Task<IEnumerable<AsteroidJsonDTO>> GetAsync(CancellationToken ct = default)
     {
         HttpResponseMessage response = await _httpClient.GetAsync(_options.Resource);
 

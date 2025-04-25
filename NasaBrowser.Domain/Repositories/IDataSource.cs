@@ -2,5 +2,5 @@
 
 public interface IDataSource<T>
 {
-    public Task<T> GetAsync();
+    public Task<T> GetAsync(CancellationToken cancellationToken = default);
 }

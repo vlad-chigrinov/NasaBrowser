@@ -13,8 +13,8 @@ public class FetchAsteroidsQueryHandler : IRequestHandler<FetchAsteroidsQuery, I
         _dataSource = dataSource;
     }
 
-    public async Task<IEnumerable<AsteroidJsonDTO>> Handle(FetchAsteroidsQuery request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<AsteroidJsonDTO>> Handle(FetchAsteroidsQuery request, CancellationToken ct)
     {
-        return await _dataSource.GetAsync();
+        return await _dataSource.GetAsync(ct);
     }
 }
