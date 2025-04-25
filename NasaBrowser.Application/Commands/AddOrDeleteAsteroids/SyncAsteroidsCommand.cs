@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using NasaBrowser.Application.Models.AsteroidJsonModel;
+using NasaBrowser.Domain.Entities;
 
 namespace NasaBrowser.Application.Commands.AddOrDeleteAsteroids;
 
 public class SyncAsteroidsCommand : IRequest
 {
-    public IEnumerable<AsteroidJsonDTO> Asteroids { get; set; }
+    public IEnumerable<Asteroid> Asteroids { get; set; }
 }

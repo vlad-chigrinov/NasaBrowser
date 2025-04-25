@@ -1,6 +1,6 @@
-﻿using NasaBrowser.Domain.QueryableTransformations;
+﻿using NasaBrowser.Domain.QueryableWorkflow.QueryableTransformations;
 
-namespace NasaBrowser.Domain.Common;
+namespace NasaBrowser.Domain.QueryableWorkflow;
 
 public interface IQueryTransformer<TTransformation, TQuery, TQueryResult>
     where TTransformation : TransformationBase<TQuery, TQueryResult>

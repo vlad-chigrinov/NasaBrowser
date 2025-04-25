@@ -1,4 +1,4 @@
-﻿namespace NasaBrowser.Domain.QueryableTransformations
+﻿namespace NasaBrowser.Domain.QueryableWorkflow.QueryableTransformations
 {
     public abstract class TransformationBase<TQuery, TResult>
     {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NasaBrowser.Domain.Common;
 using NasaBrowser.Domain.Contracts.Responses;
+using NasaBrowser.Domain.QueryableWorkflow;
 
 namespace NasaBrowser.Infrastructure.Database.Queryable;
 

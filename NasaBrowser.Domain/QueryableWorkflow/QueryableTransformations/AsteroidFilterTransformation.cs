@@ -1,6 +1,6 @@
 using NasaBrowser.Domain.Entities;
 
-namespace NasaBrowser.Domain.QueryableTransformations;
+namespace NasaBrowser.Domain.QueryableWorkflow.QueryableTransformations;
 
 public class AsteroidFilterTransformation : TransformationBase<Asteroid, Asteroid>
 {

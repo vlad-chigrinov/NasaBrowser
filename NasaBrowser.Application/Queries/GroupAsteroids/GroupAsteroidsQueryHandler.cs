@@ -1,8 +1,9 @@
 ﻿using MediatR;
-using NasaBrowser.Application.Services;
+using NasaBrowser.Application.AsteroidTransformations;
 using NasaBrowser.Domain.Common;
 using NasaBrowser.Domain.Contracts.Responses;
 using NasaBrowser.Domain.Entities;
+using NasaBrowser.Domain.QueryableWorkflow;
 
 namespace NasaBrowser.Application.Queries.GroupAsteroids;
 
@@ -24,10 +25,9 @@ public class GroupAsteroidsQueryHandler : IRequestHandler<GroupAsteroidsQuery, I
         _asteroidsTransformer = asteroidsTransformer;
     }
 
-    public async Task<IEnumerable<AsteroidGroupResponse>> Handle(GroupAsteroidsQuery request,
-        CancellationToken cancellationToken)
+    public async Task<IEnumerable<AsteroidGroupResponse>> Handle(GroupAsteroidsQuery request, CancellationToken ct)
     {
         var queryable = _asteroidsTransformer.Transform(new (_asteroidProducer.Queryable) {Request = request.GroupRequest});
-        return await _asteroidExecutor.ExecuteAsync(queryable);
+        return await _asteroidExecutor.ExecuteAsync(queryable, ct);
     }
 }

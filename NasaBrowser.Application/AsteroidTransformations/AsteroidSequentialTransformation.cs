@@ -1,9 +1,9 @@
 ﻿using NasaBrowser.Domain.Contracts.Requests;
 using NasaBrowser.Domain.Contracts.Responses;
 using NasaBrowser.Domain.Entities;
-using NasaBrowser.Domain.QueryableTransformations;
+using NasaBrowser.Domain.QueryableWorkflow.QueryableTransformations;
 
-namespace NasaBrowser.Application.Services;
+namespace NasaBrowser.Application.AsteroidTransformations;
 
 public class AsteroidSequentialTransformation : TransformationBase<Asteroid, AsteroidGroupResponse>
 {

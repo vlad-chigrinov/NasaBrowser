@@ -1,38 +1,34 @@
-using Microsoft.EntityFrameworkCore;
+using NasaBrowser.Api;
 using NasaBrowser.Api.BackgroundServices;
+using NasaBrowser.Application;
+using NasaBrowser.Infrastructure;
 using NasaBrowser.Infrastructure.Database;
-using Quartz;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.Services.AddProblemDetails();
+builder.Services.AddExceptionHandler<ProblemDetailsExceptionHandler>();
 
-builder.Services.AddQuartz();
+builder.Services.AddSwagger();
 
-builder.Services.ConfigureOptions<NasaDataSyncJobSetup>();
+builder.Services.AddBackgroundJobs(builder.Configuration);
 
-builder.Services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
+builder.Services.AddApplication();
 
-builder.Services.AddDbContext<AsteroidsDbContext>(optionsBuilder =>
-    optionsBuilder.UseNpgsql("Host=127.0.0.1;Port=5432;Database=nasa_db;User ID=SA;Password=Qwerty12;"));
-
-builder.Services.AddHttpClient();
+builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+await app.Services.ApplyMigrationsAsync<AsteroidsDbContext>();
+
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
-
-app.UseAuthorization();
 
 app.MapControllers();
 

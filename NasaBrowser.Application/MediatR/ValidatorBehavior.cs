@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using MediatR;
-using ValidationException = NasaBrowser.Application.Exceptions.ValidationException;
 
 namespace NasaBrowser.Application.MediatR
 {
@@ -15,17 +14,11 @@ namespace NasaBrowser.Application.MediatR
 
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
-            var failures = _validators
-                .Select(v => v.Validate(request))
-                .SelectMany(result => result.Errors)
-                .Where(error => error != null)
-                .ToList();
-
-            if (failures.Any())
+            foreach (var validator in _validators)
             {
-                throw new ValidationException(failures.Select(f => f.ErrorMessage));
+                await validator.ValidateAndThrowAsync(request);
             }
-
+            
             return await next();
         }
     }

@@ -2,7 +2,8 @@
 using NasaBrowser.Domain.Common;
 using NasaBrowser.Domain.Contracts.Requests;
 using NasaBrowser.Domain.Contracts.Responses;
-using NasaBrowser.Domain.QueryableTransformations;
+using NasaBrowser.Domain.QueryableWorkflow;
+using NasaBrowser.Domain.QueryableWorkflow.QueryableTransformations;
 
 namespace NasaBrowser.Infrastructure.Database.Queryable.Transformers;
 

@@ -1,6 +1,6 @@
 ﻿namespace NasaBrowser.Domain.Common;
 
-public interface IDataSource<out T>
+public interface IDataSource<T>
 {
-    public T Get();
+    public Task<T> GetAsync();
 }

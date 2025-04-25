@@ -1,6 +1,7 @@
 ﻿using NasaBrowser.Domain.Common;
 using NasaBrowser.Domain.Entities;
-using NasaBrowser.Domain.QueryableTransformations;
+using NasaBrowser.Domain.QueryableWorkflow;
+using NasaBrowser.Domain.QueryableWorkflow.QueryableTransformations;
 
 namespace NasaBrowser.Infrastructure.Database.Queryable.Transformers;
 
@@ -8,29 +9,31 @@ public class AsteroidFilterTransformer : IQueryTransformer<AsteroidFilterTransfo
 {
     public IQueryable<Asteroid> Transform(AsteroidFilterTransformation options)
     {
+        var quarybleBuilder = options.Queryable;
+        
         if (options.NamePart is not null)
         {
-            options.Queryable.Select(asteroid => asteroid.Name.Contains(options.NamePart));
+            quarybleBuilder = quarybleBuilder.Where(asteroid => asteroid.Name.Contains(options.NamePart));
         }
         
         if (options.RecClass is not null)
         {
-            options.Queryable.Select(asteroid => asteroid.RecClass == options.RecClass);
+            quarybleBuilder = quarybleBuilder.Where(asteroid => asteroid.RecClass == options.RecClass);
         }
         
         if (options.StartYear is not null && options.EndYear is not null)
         {
-            options.Queryable.Select(asteroid => asteroid.Year >= options.StartYear && asteroid.Year <= options.EndYear);
+            quarybleBuilder = quarybleBuilder.Where(asteroid => asteroid.Year >= options.StartYear && asteroid.Year <= options.EndYear);
         }
         else if (options.StartYear is not null)
         {
-            options.Queryable.Select(asteroid => asteroid.Year >= options.StartYear);
+            quarybleBuilder = quarybleBuilder.Where(asteroid => asteroid.Year >= options.StartYear);
         }
         else if (options.EndYear is not null)
         {
-            options.Queryable.Select(asteroid => asteroid.Year <= options.EndYear);
+            quarybleBuilder = quarybleBuilder.Where(asteroid => asteroid.Year <= options.EndYear);
         }
 
-        return options.Queryable;
+        return quarybleBuilder;
     }
 }

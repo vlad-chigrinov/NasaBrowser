@@ -1,7 +1,7 @@
 using NasaBrowser.Domain.Contracts.Requests;
 using NasaBrowser.Domain.Contracts.Responses;
 
-namespace NasaBrowser.Domain.QueryableTransformations;
+namespace NasaBrowser.Domain.QueryableWorkflow.QueryableTransformations;
 
 public class AsteroidSortTransformation : TransformationBase<AsteroidGroupResponse, AsteroidGroupResponse>
 {

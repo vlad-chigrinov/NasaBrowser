@@ -8,7 +8,7 @@ public class AsteroidJsonDTO
     public required string Recclass { get; set; }
     public string? Mass { get; set; }
     public required string Fall { get; set; }
-    public required string Year { get; set; }
+    public string? Year { get; set; }
     public string? Reclat { get; set; }
     public string? Reclong { get; set; }
 }

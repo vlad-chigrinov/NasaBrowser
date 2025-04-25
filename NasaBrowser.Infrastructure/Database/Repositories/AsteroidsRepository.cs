@@ -1,12 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using NasaBrowser.Domain.Common;
 using NasaBrowser.Domain.Entities;
+using NasaBrowser.Domain.Repositories;
 
 namespace NasaBrowser.Infrastructure.Database.Repositories;
 
-public class AsteroidsRepository : IRepository<Asteroid>
+public class AsteroidsRepository : IAsteroidsRepository
 {
     private readonly AsteroidsDbContext _dbContext;
+    private IDbContextTransaction? _transaction;
 
     public AsteroidsRepository(AsteroidsDbContext dbContext)
     {
@@ -17,19 +20,47 @@ public class AsteroidsRepository : IRepository<Asteroid>
     {
         return await _dbContext.Asteroids.ToListAsync(ct);
     }
-
-    public void Add(Asteroid entity)
+    
+    public async Task<HashSet<int>> GetIdentifiersAsync(CancellationToken ct = default)
     {
-        _dbContext.Asteroids.Add(entity);
+        return await _dbContext.Asteroids.Select(asteroid => asteroid.Id).ToHashSetAsync(ct);
     }
 
-    public void Remove(Asteroid entity)
+    public void AddRange(IEnumerable<Asteroid> entities)
     {
-        _dbContext.Asteroids.Remove(entity);
+        _dbContext.Asteroids.AddRange(entities);
     }
 
-    public async Task SaveChangesAsync(CancellationToken ct = default)
+    public void RemoveRange(IEnumerable<int> ids)
     {
-        await _dbContext.SaveChangesAsync(ct);
+        _dbContext.Asteroids.Where(e => ids.Contains(e.Id)).ExecuteDelete();
+    }
+
+    public async Task<int> SaveChangesAsync()
+    {
+        return await _dbContext.SaveChangesAsync();
+    }
+
+    public async Task BeginTransactionAsync()
+    {
+        _transaction = await _dbContext.Database.BeginTransactionAsync();
+    }
+
+    public async Task CommitTransactionAsync()
+    {
+        if (_transaction != null)
+        {
+            await _transaction.CommitAsync();
+            await _transaction.DisposeAsync();
+        }
+    }
+
+    public async Task RollbackTransactionAsync()
+    {
+        if (_transaction != null)
+        {
+            await _transaction.RollbackAsync();
+            await _transaction.DisposeAsync();
+        }
     }
 }

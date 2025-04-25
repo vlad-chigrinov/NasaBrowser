@@ -1,5 +1,6 @@
 ﻿using NasaBrowser.Domain.Common;
 using NasaBrowser.Domain.Entities;
+using NasaBrowser.Domain.QueryableWorkflow;
 
 namespace NasaBrowser.Infrastructure.Database.Queryable;
 

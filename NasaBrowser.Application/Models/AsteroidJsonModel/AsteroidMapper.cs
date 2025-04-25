@@ -1,4 +1,5 @@
-﻿using NasaBrowser.Application.Exceptions;
+﻿using System.Globalization;
+using NasaBrowser.Application.Exceptions;
 using NasaBrowser.Domain.Common;
 using NasaBrowser.Domain.Entities;
 using NasaBrowser.Domain.Enums;
@@ -21,8 +22,8 @@ public class AsteroidMapper : IMapper<AsteroidJsonDTO, Asteroid>
         
         bool yearValid = DateTime.TryParse(jsonDto.Year, out DateTime year);
         
-        bool reclatValid = decimal.TryParse(jsonDto.Reclat, out decimal reclat);
-        bool reclongValid = decimal.TryParse(jsonDto.Reclong, out decimal reclong);
+        bool reclatValid = double.TryParse(jsonDto.Reclat, NumberStyles.Float, CultureInfo.InvariantCulture, out double reclat);
+        bool reclongValid = double.TryParse(jsonDto.Reclong, NumberStyles.Float, CultureInfo.InvariantCulture, out double reclong);
         
         return new Asteroid
         {
@@ -31,8 +32,8 @@ public class AsteroidMapper : IMapper<AsteroidJsonDTO, Asteroid>
             RecClass = jsonDto.Recclass,
             NameType = nameTypeValid ? nameType : default,
             Fall = fallValid ? fall : default,
-            Mass = massValid ? mass : 0,
-            Year = yearValid ? year.Year : 0,
+            Mass = mass,
+            Year = yearValid ? year.Year : null,
             RecLat = reclatValid ? reclat : null,
             RecLong = reclongValid ? reclong : null
         };

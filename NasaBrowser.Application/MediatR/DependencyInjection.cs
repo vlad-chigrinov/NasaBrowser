@@ -3,9 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace NasaBrowser.Application.MediatR;
 
-public static class MediartDIExtensions
+public static class DependencyInjection
 {
-    public static void AddAndConfigureMediatR(this IServiceCollection services)
+    public static IServiceCollection AddAndConfigureMediatR(this IServiceCollection services)
     {
         services.AddMediatR(cfg =>
         {
@@ -13,5 +13,7 @@ public static class MediartDIExtensions
 
             cfg.AddOpenBehavior(typeof(ValidatorBehavior<,>));
         });
+
+        return services;
     }
 }
