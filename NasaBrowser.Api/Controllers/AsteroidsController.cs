@@ -8,11 +8,11 @@ namespace NasaBrowser.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class NasaDataController : ControllerBase
+public class AsteroidsController : ControllerBase
 {
     private readonly ISender _sender;
 
-    public NasaDataController(ISender sender)
+    public AsteroidsController(ISender sender)
     {
         _sender = sender;
     }

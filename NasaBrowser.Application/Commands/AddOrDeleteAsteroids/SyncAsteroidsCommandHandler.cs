@@ -27,7 +27,7 @@ public class SyncAsteroidsCommandHandler : IRequestHandler<SyncAsteroidsCommand>
         var itemsToAdd = request.Asteroids
             .Where(e => !dbIds.Contains(e.Id));
 
-        if (idsToDelete.Any() == false || itemsToAdd.Any() == false)
+        if (idsToDelete.Any() == false && itemsToAdd.Any() == false)
             return;
 
         await _cacheRepository.ClearAsync(ct);

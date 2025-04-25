@@ -8,7 +8,7 @@ namespace NasaBrowser.Infrastructure.Database.Repositories;
 public class AsteroidsGroupCacheRepository : IAsteroidsGroupCacheRepository
 {
     private readonly HybridCache _hybridCache;
-    
+
     private const string DefaultTag = nameof(AsteroidsGroupCacheRepository);
 
     public AsteroidsGroupCacheRepository(HybridCache hybridCache)
@@ -20,7 +20,10 @@ public class AsteroidsGroupCacheRepository : IAsteroidsGroupCacheRepository
         Func<CancellationToken, ValueTask<IEnumerable<AsteroidsGroupResponse>>> func,
         CancellationToken cancellationToken)
     {
-        return await _hybridCache.GetOrCreateAsync(request.GetUniqueKey(), func, tags: [DefaultTag], cancellationToken: CancellationToken.None);
+        return await _hybridCache.GetOrCreateAsync(request.GetUniqueKey(), func,
+            options: new HybridCacheEntryOptions { Expiration = TimeSpan.FromMinutes(5) },
+            tags: [DefaultTag],
+            cancellationToken: CancellationToken.None);
     }
 
     public async Task ClearAsync(CancellationToken cancellationToken = default)
