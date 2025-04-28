@@ -15,10 +15,12 @@ public class GroupAsteroidsQueryValidator : AbstractValidator<GroupAsteroidsQuer
                        && (s.EndYear is null || s.EndYear < currentYear);
             })
             .WithMessage("The start or end year must be greater than the current year.")
+            .WithErrorCode("InvalidYear")
             .Must(s =>
             {
                 return (s.StartYear is null || s.EndYear is null) || (s.StartYear <= s.EndYear);
             })
-            .WithMessage("The start year must be less than or equal to the end year.");
+            .WithMessage("The start year must be less than or equal to the end year.")
+            .WithErrorCode("InvalidYear");
     }
 }

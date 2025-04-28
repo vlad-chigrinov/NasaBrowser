@@ -12,11 +12,11 @@ namespace NasaBrowser.Application.MediatR
             _validators = validators;
         }
 
-        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken ct)
         {
             foreach (var validator in _validators)
             {
-                await validator.ValidateAndThrowAsync(request);
+                await validator.ValidateAndThrowAsync(request, cancellationToken: ct);
             }
             
             return await next();

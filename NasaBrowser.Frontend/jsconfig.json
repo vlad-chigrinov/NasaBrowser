@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "types": ["naive-ui/volar"],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}

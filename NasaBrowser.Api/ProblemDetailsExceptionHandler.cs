@@ -23,9 +23,17 @@ public class ProblemDetailsExceptionHandler(IProblemDetailsService problemDetail
                 Exception = exception,
                 ProblemDetails = new ProblemDetails
                 {
-                    Title = "Error Occured",
+                    Title = exception switch
+                    {
+                        ValidationException e => e.Errors.First().ErrorCode,
+                        _ => "Error occured"
+                    },
                     Type = exception.GetType().Name,
-                    Detail = exception.Message,
+                    Detail = exception switch
+                    {
+                        ValidationException e => e.Errors.First().ErrorMessage,
+                        _ => exception.Message
+                    },
                     Status = httpContext.Response.StatusCode
                 }
             }

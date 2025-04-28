@@ -32,6 +32,8 @@ var app = builder.Build();
 
 await app.Services.ApplyMigrationsAsync<AsteroidsDbContext>();
 
+app.UseExceptionHandler();
+
 app.UseCors(defaultCorsPolicyName);
 
 if (app.Environment.IsDevelopment())
