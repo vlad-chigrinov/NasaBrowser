@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Options;
 using NasaBrowser.Application.Exceptions;
 using NasaBrowser.Application.Models.AsteroidJsonModel;
-using NasaBrowser.Domain.Common;
+using NasaBrowser.Domain.Repositories;
 
 namespace NasaBrowser.Infrastructure.HttpClients;
 

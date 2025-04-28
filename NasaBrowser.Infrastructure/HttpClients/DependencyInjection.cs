@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NasaBrowser.Application.Models.AsteroidJsonModel;
-using NasaBrowser.Domain.Common;
+using NasaBrowser.Domain.Repositories;
 using Polly;
 using Polly.Extensions.Http;
 

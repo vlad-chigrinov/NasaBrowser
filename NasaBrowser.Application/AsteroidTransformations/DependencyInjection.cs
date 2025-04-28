@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using NasaBrowser.Domain.Common;
+using NasaBrowser.Application.QueryableWorkflow;
 using NasaBrowser.Domain.Contracts.Responses;
 using NasaBrowser.Domain.Entities;
-using NasaBrowser.Domain.QueryableWorkflow;
 
 namespace NasaBrowser.Application.AsteroidTransformations;
 

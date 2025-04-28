@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NasaBrowser.Domain.Common;
-using NasaBrowser.Domain.Entities;
 using NasaBrowser.Domain.Repositories;
 using NasaBrowser.Infrastructure.Database.Queryable;
 using NasaBrowser.Infrastructure.Database.Repositories;

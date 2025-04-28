@@ -1,9 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using NasaBrowser.Domain.Common;
+using NasaBrowser.Application.QueryableWorkflow;
+using NasaBrowser.Application.QueryableWorkflow.QueryableTransformations;
 using NasaBrowser.Domain.Contracts.Responses;
 using NasaBrowser.Domain.Entities;
-using NasaBrowser.Domain.QueryableWorkflow;
-using NasaBrowser.Domain.QueryableWorkflow.QueryableTransformations;
 using NasaBrowser.Infrastructure.Database.Queryable.Transformers;
 
 namespace NasaBrowser.Infrastructure.Database.Queryable;

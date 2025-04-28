@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using NasaBrowser.Domain.Repositories;
 
-namespace NasaBrowser.Infrastructure.Database.Repositories;
+namespace NasaBrowser.Infrastructure.Caching;
 
 public static class DependencyInjection
 {

@@ -3,7 +3,7 @@ using NasaBrowser.Domain.Contracts.Requests;
 using NasaBrowser.Domain.Contracts.Responses;
 using NasaBrowser.Domain.Repositories;
 
-namespace NasaBrowser.Infrastructure.Database.Repositories;
+namespace NasaBrowser.Infrastructure.Caching;
 
 public class AsteroidsGroupCacheRepository : IAsteroidsGroupCacheRepository
 {

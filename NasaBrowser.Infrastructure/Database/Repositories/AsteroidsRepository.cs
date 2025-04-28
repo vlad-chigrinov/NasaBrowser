@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using NasaBrowser.Domain.Common;
 using NasaBrowser.Domain.Entities;
 using NasaBrowser.Domain.Repositories;
 
@@ -18,12 +17,12 @@ public class AsteroidsRepository : IAsteroidsRepository
 
     public async Task<IEnumerable<Asteroid>> GetAllAsync(CancellationToken ct = default)
     {
-        return await _dbContext.Asteroids.ToListAsync(ct);
+        return await _dbContext.Asteroids.AsNoTracking().ToListAsync(ct);
     }
     
     public async Task<HashSet<int>> GetIdentifiersAsync(CancellationToken ct = default)
     {
-        return await _dbContext.Asteroids.Select(asteroid => asteroid.Id).ToHashSetAsync(ct);
+        return await _dbContext.Asteroids.AsNoTracking().Select(asteroid => asteroid.Id).ToHashSetAsync(ct);
     }
 
     public void AddRange(IEnumerable<Asteroid> entities)

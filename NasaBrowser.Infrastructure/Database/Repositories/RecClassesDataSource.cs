@@ -15,7 +15,7 @@ public class RecClassesDataSource : IRecClassecDataSource
 
     public async Task<AvailableRecClassesResponse> GetAsync(CancellationToken ct = default)
     {
-        var recClasses = await _dbContext.Asteroids.Select(asteroid=>asteroid.RecClass).Distinct().ToListAsync();
+        var recClasses = await _dbContext.Asteroids.AsNoTracking().Select(asteroid=>asteroid.RecClass).Distinct().ToListAsync();
         
         return new AvailableRecClassesResponse{RecClasses = recClasses};
     }

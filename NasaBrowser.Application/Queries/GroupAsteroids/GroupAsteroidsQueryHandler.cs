@@ -1,9 +1,8 @@
 ﻿using MediatR;
 using NasaBrowser.Application.AsteroidTransformations;
-using NasaBrowser.Domain.Common;
+using NasaBrowser.Application.QueryableWorkflow;
 using NasaBrowser.Domain.Contracts.Responses;
 using NasaBrowser.Domain.Entities;
-using NasaBrowser.Domain.QueryableWorkflow;
 using NasaBrowser.Domain.Repositories;
 
 namespace NasaBrowser.Application.Queries.GroupAsteroids;

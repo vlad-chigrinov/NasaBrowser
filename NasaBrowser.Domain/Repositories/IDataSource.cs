@@ -1,4 +1,4 @@
-﻿namespace NasaBrowser.Domain.Common;
+﻿namespace NasaBrowser.Domain.Repositories;
 
 public interface IDataSource<T>
 {

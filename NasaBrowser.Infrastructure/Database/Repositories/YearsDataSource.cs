@@ -15,7 +15,7 @@ public class YearsDataSource : IYearsDataSource
 
     public async Task<AvailableYearsResponse> GetAsync(CancellationToken ct = default)
     {
-        var years = await _dbContext.Asteroids.Select(asteroid => asteroid.Year ?? 0).Distinct().ToListAsync(ct);
+        var years = await _dbContext.Asteroids.AsNoTracking().Select(asteroid => asteroid.Year ?? 0).Distinct().ToListAsync(ct);
 
         return new AvailableYearsResponse { Years = years };
     }

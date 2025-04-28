@@ -1,9 +1,8 @@
 ﻿using System.Linq.Expressions;
-using NasaBrowser.Domain.Common;
+using NasaBrowser.Application.QueryableWorkflow;
+using NasaBrowser.Application.QueryableWorkflow.QueryableTransformations;
 using NasaBrowser.Domain.Contracts.Requests;
 using NasaBrowser.Domain.Contracts.Responses;
-using NasaBrowser.Domain.QueryableWorkflow;
-using NasaBrowser.Domain.QueryableWorkflow.QueryableTransformations;
 
 namespace NasaBrowser.Infrastructure.Database.Queryable.Transformers;
 

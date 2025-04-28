@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NasaBrowser.Infrastructure.Caching;
 using NasaBrowser.Infrastructure.Database;
-using NasaBrowser.Infrastructure.Database.Repositories;
 using NasaBrowser.Infrastructure.HttpClients;
 
 namespace NasaBrowser.Infrastructure;

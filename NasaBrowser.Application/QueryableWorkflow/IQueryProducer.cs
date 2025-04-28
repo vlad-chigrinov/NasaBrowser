@@ -1,4 +1,4 @@
-﻿namespace NasaBrowser.Domain.QueryableWorkflow;
+﻿namespace NasaBrowser.Application.QueryableWorkflow;
 
 public interface IQueryProducer<TOuput>
 {

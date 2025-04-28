@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using NasaBrowser.Application.Models.AsteroidJsonModel;
-using NasaBrowser.Domain.Common;
+using NasaBrowser.Domain.Repositories;
 
 namespace NasaBrowser.Application.Queries.FetchAsteroids;
 
