@@ -8,6 +8,7 @@ export async function fetchAsteroids(params) {
     }
   }
   const response = await axios.get(`Asteroids?${queryParams}`)
+  if(response.status == 400) return new Error(response.data.datail)
   if (response.status != 200) throw new Error('Failed to fetch asteroids')
   return response.data
 }

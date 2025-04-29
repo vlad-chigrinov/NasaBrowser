@@ -20,23 +20,37 @@
 
                 <div class="filter-group">
                     <label>Name Contains:</label>
-                    <input type="text" v-model="namePart" @input="handleNameInput" />
+                    <n-input v-model:value="namePart" type="text" placeholder="Basic Input" @input="handleNameInput" />
                 </div>
 
                 <div class="filter-group">
                     <label>Sort By:</label>
-                    <n-select v-model:value="sortBy"
-                        :options="[{ label: 'Year', value: 0 }, { label: 'Total Mass', value: 2 }, { label: 'Quantity', value: 1 }]" />
+                    <n-radio-group v-model:value="sortBy">
+                        <n-radio-button :value="Number(0)">
+                            Year
+                        </n-radio-button>
+                        <n-radio-button :value="Number(2)">
+                            Total Mass
+                        </n-radio-button>
+                        <n-radio-button :value="Number(1)">
+                            Quantity
+                        </n-radio-button>
+                    </n-radio-group>
                 </div>
 
-                <div class="filter-group">
-                    <label>
-                        <input type="checkbox" v-model="sortDesc" />
-                        Descending
-                    </label>
-                </div>
+                <n-switch v-model:value="sortDesc" size="large">
+                    <template #checked-icon>
+                        <n-icon :component="TextSortAscending16Filled" />
+                    </template>
+                    <template #unchecked-icon>
+                        <n-icon :component="TextSortDescending16Filled" />
+                    </template>
+                </n-switch>
             </div>
-            <n-table v-if="asteroidsData.length" :bordered="false" :single-line="false">
+            <n-alert v-if="error" title="Internal Error" type="error">
+                {{ error }}
+            </n-alert>
+            <n-table v-else-if="asteroidsData.length" :bordered="false" :single-line="false">
                 <thead>
                     <tr>
                         <th>Year</th>
@@ -47,12 +61,14 @@
                 <tbody>
                     <tr v-for="item in asteroidsData" :key="item.year">
                         <td>{{ item.year }}</td>
-                        <td>{{ item.sumMass.toLocaleString() }}</td>
+                        <td>{{ item.sumMass }}</td>
                         <td>{{ item.quantity }}</td>
                     </tr>
                 </tbody>
             </n-table>
-            <div v-else>No data found</div>
+            <n-alert v-else title="Empty list" type="wan">
+                
+            </n-alert>
         </div>
     </div>
 </template>
@@ -60,7 +76,8 @@
 <script setup>
 import { ref, onMounted, computed, watch } from 'vue';
 import { fetchAsteroids, fetchYears, fetchClasses } from '@/services/api';
-import { NTable, NSelect } from "naive-ui"
+import { NTable, NRadioGroup, NRadioButton, NSwitch, NIcon, NInput, NSelect, NAlert } from "naive-ui"
+import { TextSortAscending16Filled, TextSortDescending16Filled } from "@vicons/fluent"
 
 const yearsList = ref([]);
 const classesList = ref([]);
@@ -155,8 +172,8 @@ function debounce(fn, delay) {
 }
 
 .error {
-    color: red;
+    color: rgb(255, 0, 0);
     padding: 1rem;
-    border: 1px solid red;
+    border: 1px solid rgb(255, 0, 0);
 }
 </style>
