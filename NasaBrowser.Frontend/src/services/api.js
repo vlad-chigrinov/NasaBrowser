@@ -7,20 +7,28 @@ export async function fetchAsteroids(params) {
       queryParams.append(key, params[key])
     }
   }
-  const response = await axios.get(`Asteroids?${queryParams}`)
-  if(response.status == 400) return new Error(response.data.datail)
-  if (response.status != 200) throw new Error('Failed to fetch asteroids')
+
+  const response = await axios.get(`Asteroids?${queryParams}`).catch((err) => {
+    if (err.status == 400) {
+      throw new Error(err.response.data.detail)
+    } else {
+      throw new Error('Failed to fetch asteroids')
+    }
+  })
+
   return response.data
 }
 
 export async function fetchYears() {
-  const response = await axios.get('Asteroids/years')
-  if (response.status != 200) throw new Error('Failed to fetch years')
+  const response = await axios.get('Asteroids/years').catch(() => {
+    throw new Error('Failed to fetch years')
+  })
   return response.data.years
 }
 
 export async function fetchClasses() {
-  const response = await axios.get('Asteroids/recclasses')
-  if (response.status != 200) throw new Error('Failed to fetch classes')
+  const response = await axios.get('Asteroids/recclasses').catch(() => {
+    throw new Error('Failed to fetch classes')
+  })
   return response.data.recClasses
 }

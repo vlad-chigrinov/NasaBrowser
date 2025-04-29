@@ -1,9 +1,15 @@
 <script setup>
-import AsteroidsTable from './components/AsteroidsTable.vue';
+import AsteroidsTable from '@/pages/AsteroidsTable.vue';
 </script>
 
 <template>
   <main>
-    <AsteroidsTable/>
+    <AsteroidsTable />
   </main>
 </template>
+
+<style scoped>
+main {
+  padding: 10px;
+}
+</style>
