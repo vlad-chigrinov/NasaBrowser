@@ -1,0 +1,40 @@
+services:
+  nasabrowser.api:
+    image: ${DOCKER_REGISTRY-}nasabrowserapi
+    build:
+      context: .
+      dockerfile: NasaBrowser.Api/Dockerfile
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+    depends_on:
+      - nasabrowser.cache
+      - nasabrowser.db
+  nasabrowser.cache:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+  nasabrowser.db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: SA
+      POSTGRES_PASSWORD: Qwerty12
+      POSTGRES_DB: nasa-browser
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data/pgdata
+  nasabrowser.frontend:
+      image: ${DOCKER_REGISTRY-}nasabrowserfrontend
+      build:
+        context: NasaBrowser.Frontend
+        dockerfile: Dockerfile
+      ports:
+        - "80:80"
+      depends_on:
+        - nasabrowser.api
